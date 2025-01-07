@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+    {% if current_character %}
+        <p>The Current Character is {{current_character.name}}</p>
+        <p>Their title is {{current_character.title}}</p>
+        <img src={{current_character.character_image}}>
+    {% else %}
+        <p>No current_character</p>
+    {% endif %}
+</head>
+<body>
+
+</body>

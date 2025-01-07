@@ -3,6 +3,7 @@ from pathlib import Path
 import csv
 import pandas as pd
 from bs4 import BeautifulSoup
+import sys
 from selenium import webdriver
 from time import sleep
 from random import choice
@@ -16,9 +17,10 @@ dr = webdriver.Chrome()
 all_names = []
 all_titles = []
 class GBFCharacter:
-    def __init__(self, name, title):
+    def __init__(self, name, title, character_art):
         self.name = name
         self.title = title
+        self.character_art = character_art
     def __str__(self):
         return f"{self.name} : {self.title}"
     def __iter__(self):
@@ -63,10 +65,13 @@ def get_all_titles_and_create_classes():
         print(f"Now Scraping {base_url}{url}")
         soup = BeautifulSoup(dr.page_source, "html.parser")
         current_title = soup.find(class_="char-title")
+        panel= soup.find(class_="tabber__panel")
+        art = panel.find('img')
+        character_art = art['src']
         current_title_in_brackets = re.findall(r"\[(.*?)\]", current_title.get_text())
         print(current_title_in_brackets)
-        characterObject = GBFCharacter(new_name, current_title_in_brackets)
-        all_titles.append({'name' : characterObject.name, 'title': characterObject.title})
+        characterObject = GBFCharacter(new_name, current_title_in_brackets, character_art)
+        all_titles.append({'name' : characterObject.name, 'title': characterObject.title, 'src': characterObject.character_art})
         print(all_titles)
     dr.quit()
     return print("Finished Creating Dictionary")
