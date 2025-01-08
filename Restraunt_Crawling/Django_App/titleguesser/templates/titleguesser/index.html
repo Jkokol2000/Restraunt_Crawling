@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <head>
+
+</head>
+<body>
+    <h1>Lives Left: {{lives}} - Current Score: {{score}}</h1>
     {% if current_character %}
-        <p>The Current Character is {{current_character.name}}</p>
+        <p>Can you guess the character?</p>
         <p>Their title is {{current_character.title}}</p>
-        <img src={{current_character.character_image}}>
     {% else %}
         <p>No current_character</p>
     {% endif %}
-</head>
-<body>
-
+    <form method="post">
+        {% csrf_token %}
+        <label for="answer">Your Answer:</label>
+        <input type="text" name="answer" id="answer" required>
+        <button type="submit">Submit Answer</button>
+    </form>
 </body>
