@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
-
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'titleguesser/style.css' %}">
 </head>
 <body>
     <h1>Lives Left: {{lives}} - Current Score: {{score}}</h1>
@@ -10,10 +11,19 @@
     {% else %}
         <p>No current_character</p>
     {% endif %}
-    <form method="post">
+    <!-- Search Bar with Suggestions -->
+
+
+    <form method="POST">
         {% csrf_token %}
         <label for="answer">Your Answer:</label>
-        <input type="text" name="answer" id="answer" required>
+        <div class="search-container">
+            <input type="text" name="answer" id="search-bar" placeholder="Search for a character..." autocomplete="off">
+            <div id="suggestions"></div>
+        </div>
         <button type="submit">Submit Answer</button>
     </form>
+
+    <!-- Load the JavaScript -->
+    <script src="{% static 'js/search.js' %}"></script>
 </body>

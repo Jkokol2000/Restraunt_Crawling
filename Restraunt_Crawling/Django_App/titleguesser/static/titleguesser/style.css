@@ -1,0 +1,21 @@
+#suggestions {
+    border: 1px solid #ccc;
+    max-width: 300px;
+    background: #fff;
+    position: absolute;
+    z-index: 1000;
+}
+
+#suggestions div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#suggestions div:hover {
+    background: #f0f0f0;
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+}

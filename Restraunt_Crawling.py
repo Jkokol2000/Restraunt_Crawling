@@ -93,29 +93,3 @@ remove_dupe_names()
 get_all_titles_and_create_classes()
 create_csv(all_titles)
 add_to_csv(all_titles)
-
-df = pd.read_csv("titles.csv")
-select_from_csv = df.sample(n=1)
-selected_character = GBFCharacter(select_from_csv["name"].values[0], select_from_csv["title"].values[0])
-remaining_guesses = 3
-print("This title is: ")
-print(selected_character.title)
-guess = ''
-while guess.lower() != selected_character.name.lower() and remaining_guesses > 0:
-    guess = input(
-        f"Who's title is this? Guesses remaining {remaining_guesses} \n"
-    )
-
-    if guess == selected_character.name:
-        print("CORRECT")
-        break
-    remaining_guesses -= 1
-
-    if remaining_guesses == 3:
-        print(f"Nope, {remaining_guesses} guesses left")
-    elif remaining_guesses == 2:
-        print(f"Nope, {remaining_guesses} guesses left")
-    elif remaining_guesses == 1:
-        print(f"Nope, {remaining_guesses} guesses left")
-    else:
-        print(f"Sorry, out of guesses. The character with this title is {selected_character.name}")

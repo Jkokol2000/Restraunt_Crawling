@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.template import loader
 import random
 
@@ -51,3 +51,11 @@ def index(request):
         return render(request, 'titleguesser/game_over.html', {'score': request.session['score']})
 
     return HttpResponse(template.render(context, request))
+
+def search_characters(request):
+    query = request.GET.get('q', '')
+    if query:
+        results = Character.objects.filter(name__icontains=query)[:5]
+        suggestions = [character.name for character in results]
+        return JsonResponse({'suggestions': suggestions})
+    return JsonResponse({'suggestions': []})
